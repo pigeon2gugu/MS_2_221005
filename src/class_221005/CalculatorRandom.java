@@ -13,8 +13,6 @@ public class CalculatorRandom {
         this.b = getRandomNum();
     }
 
-
-
     public void plus() {
         System.out.println(a + b);
     }
@@ -27,6 +25,7 @@ public class CalculatorRandom {
         System.out.println(a * b);
     }
 
+
     public void divide() {
 
         if(b == 0) {
@@ -37,6 +36,21 @@ public class CalculatorRandom {
         }
 
     }
+
+    /*
+    public void divide() {
+        try {
+            double result = (double) a / b;
+            if(Double.isFinite(result) || Double.isNaN((result))){
+            throw new ArithmeticException();
+        }
+            System.out.println(result);
+        }  catch (ArithmeticException e) {
+                System.out.printf("랜덤하게 생성된 숫자가 0입니다.");
+        }
+
+    }
+    */
 
 }
 

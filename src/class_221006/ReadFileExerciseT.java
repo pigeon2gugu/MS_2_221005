@@ -15,3 +15,13 @@ public class ReadFileExerciseT {
         //FileReader fileReader = new FileReader("C:\\Users\\Administrator\\git\\like-lion-2\\a_file");
     }
 }
+
+/*
+.\.git
+.\.gitignore
+.\.idea
+.\a_file
+.\like-lion-2.iml
+.\out
+.\src
+ */

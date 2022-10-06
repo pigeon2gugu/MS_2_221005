@@ -12,7 +12,7 @@ public class SetExerciseWithoutDuplicateAlphabet {
         RandomAlphabetGenerator randomAlphabetGenerator = new RandomAlphabetGenerator();
 
         for(int i = 0 ; i <50; i++) {
-            char ch = (char) (randomAlphabetGenerator.generate(26)+65);
+            char ch = randomAlphabetGenerator.generate();
             noDuplicateAlphabet.add(ch);
         }
 

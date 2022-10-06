@@ -12,7 +12,7 @@ public class SetExerciseWithoutDuplicateNumber {
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
 
         for(int i = 0 ; i <50; i++) {
-            int r = randomNumberGenerator.generate(10);
+            int r = randomNumberGenerator.generate(50);
             noDuplicateNumber.add(r);
         }
 

@@ -16,9 +16,9 @@ public class ReadFileExercise {
         this.filename = filename;
     }
 
-    char readOneByte(String fileName) throws IOException {
+    char readOneByte() throws IOException {
         BufferedReader br = new BufferedReader(
-                new FileReader(fileName),
+                new FileReader(this.filename),
                 16 * 1024
         );
 
@@ -26,8 +26,8 @@ public class ReadFileExercise {
 
     }
     public static void main(String[] args) throws IOException {
-        ReadFileExercise readFileExercise = new ReadFileExercise("");
-        char c = readFileExercise.readOneByte("C:\\Users\\Administrator\\git\\like-lion-2\\a_file");
+        ReadFileExercise readFileExercise = new ReadFileExercise("C:\\Users\\Administrator\\git\\like-lion-2\\a_file");
+        char c = readFileExercise.readOneByte();
         System.out.println(c);
     }
 }

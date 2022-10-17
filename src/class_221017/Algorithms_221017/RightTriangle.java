@@ -2,7 +2,11 @@ package class_221017.Algorithms_221017;
 
 public class RightTriangle {
 
-    private String letter;
+    private String letter = "*";
+
+    public RightTriangle() {
+
+    }
     public RightTriangle(String n) {
         this.letter = n;
     }

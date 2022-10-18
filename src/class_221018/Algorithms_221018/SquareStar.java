@@ -18,9 +18,16 @@ public class SquareStar {
 
     }
 
+    void printStar2() {
+        for (int i = 0; i <this.length ; i++) {
+            System.out.println("*".repeat(this.length));
+        }
+
+    }
+
 
     public static void main(String[] args) {
         SquareStar ss = new SquareStar(5);
-        ss.printStar();
+        ss.printStar2();
     }
 }

@@ -14,12 +14,11 @@ public class Programmers_42748_2 {
         int result = 0;
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         for(int i = frIdx-1; i < toInx; i++)  {
-            pq.add(arr[i]);
-
+            pq.add(arr[i]); //heap구조로 정렬되기 때문에  생각한 우선순위가 아닐 수 있음.
         }
-        System.out.println(pq);
+
         for (int i = 0; i < nth; i++) {
-            result = pq.poll(); // stack의 pop과 비슷
+            result = pq.poll(); // stack의 pop과 비슷 이 때 우선순위로 poll이 됨
         }
         return result;
     }

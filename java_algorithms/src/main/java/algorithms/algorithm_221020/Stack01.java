@@ -1,4 +1,4 @@
-package algorithms.algoritm_221020;
+package algorithms.algorithm_221020;
 
 public class Stack01 {
     private int[] arr = new int[10000];

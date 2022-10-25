@@ -1,4 +1,4 @@
-package algorithms.algoritm_221020;
+package algorithms.algorithm_221020;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

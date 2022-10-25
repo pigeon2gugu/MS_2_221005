@@ -1,6 +1,5 @@
-package algorithms.algoritm_221021;
+package algorithms.algorithm_221021;
 
-import java.util.Arrays;
 import java.util.Stack;
 
 public class RightParenthesisStack {

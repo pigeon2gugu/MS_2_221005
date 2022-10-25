@@ -1,6 +1,4 @@
-package algorithms.algoritm_221021;
-
-import java.util.Arrays;
+package algorithms.algorithm_221021;
 
 public class RightParenthesis {
     boolean solution(String s) {

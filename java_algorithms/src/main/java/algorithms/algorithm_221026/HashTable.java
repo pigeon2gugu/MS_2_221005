@@ -1,4 +1,4 @@
-package algorithms.algorithms_221026;
+package algorithms.algorithm_221026;
 
 import java.util.ArrayList;
 import java.util.List;

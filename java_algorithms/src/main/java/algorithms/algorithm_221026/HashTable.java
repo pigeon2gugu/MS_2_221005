@@ -53,7 +53,7 @@ public class HashTable {
         System.out.println(hashCode + "방에 저장이 완료 되었습니다.");
     }
 
-    //key값으로 value search
+    //hash(key)값과 key (String)값으로 value search (hash(key)의 중복 경우 고려)
     public Integer get(String key) {
         List<Node> nodes = this.table[hash(key)];
         for (Node node : nodes) {

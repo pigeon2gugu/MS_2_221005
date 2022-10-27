@@ -24,12 +24,7 @@ public class Programmers_42576 {
 
         //완주자 또한 같은 HashMap에 add하여 count를 늘려준다.
         for(String i : completion) {
-            if(ptp.get(i) == null)  {
-                ptp.put(i, 1);
-            }
-            else {
-                ptp.put(i, ptp.get(i)+1);
-            }
+            ptp.put(i, ptp.get(i)+1);
         }
 
         String answer = "";

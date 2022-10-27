@@ -6,6 +6,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 //Post로 API요청
+//javascript json형식 데이터 받아오기
+//ex) {
+//  "name":"kyeongrok",
+//  "email":"oceanfog1@gmail.com",
+//  "age":36
+//}
+
 @RestController
 @RequestMapping("/api/v1/post-api")
 public class PostController {

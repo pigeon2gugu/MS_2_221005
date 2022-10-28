@@ -5,6 +5,8 @@ import com.example.springbootjdbcuserdao.domain.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
+
 @RestController
 @RequestMapping("/api/v1")
 public class UserController {
@@ -15,25 +17,25 @@ public class UserController {
         this.userDao = userDao;
     }
 
-    @PostMapping("/user")
-    public void add() {
-        User user1 = new User("1", "Kyeongrok", "1234");
+    @GetMapping("/user")
+    public String add() throws SQLException {
+        User user1 = new User("1", "Haneul", "1234");
         userDao.add(user1);
-        System.out.println("유저 정보 등록 완료.");
-        System.out.printf("id : %s, name : %s, password : %s \n", user1.getId(), user1.getName(), user1.getPassword());
+        return user1.getName();
     }
 
-    @DeleteMapping("/user")
-    public void delete() {
-        userDao.deleteAll();
-        System.out.println("유저 정보 전부 삭제.");
+    @DeleteMapping("/user/delete")
+    public ResponseEntity<Integer> deleteAll() {
+        return ResponseEntity
+                .ok()
+                .body(userDao.deleteAll());
     }
 
-    @DeleteMapping("/user")
-    public void deleteById() {
-        String dId = "1";
-        userDao.deleteById(dId);
-        System.out.printf("%s 번 유저 정보 삭제.", dId);
+    @GetMapping("/user/{id}")
+    public ResponseEntity<Integer> deleteUser(@PathVariable String id) {
+        return ResponseEntity
+                .ok()
+                .body(userDao.deleteById(id));
     }
 }
 

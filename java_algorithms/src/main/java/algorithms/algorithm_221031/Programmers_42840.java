@@ -20,7 +20,6 @@ public class Programmers_42840 {
                     std1Score += 1;
                 }
             }
-
             System.out.println(std1Score);
 
             return answer;

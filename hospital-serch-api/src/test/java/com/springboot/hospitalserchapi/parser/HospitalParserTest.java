@@ -1,5 +1,6 @@
 package com.springboot.hospitalserchapi.parser;
 
+import com.springboot.hospitalserchapi.dao.HospitalDao;
 import com.springboot.hospitalserchapi.domain.Hospital;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,17 @@ class HospitalParserTest {
     void setUp() {
         this.hospitalReadLineContext = context.getBean("hospitalReadLineContext", ReadLineContext.class);
     }*/
+
+    @Autowired //HospitalDao 에 @Component가 있어 bean으로 등록되어 있음.
+    HospitalDao hospitalDao;
+
+    @Test
+    @DisplayName("Hospital이 insert가 잘 되는지")
+    void insert() {
+        HospitalParser hp = new HospitalParser();
+        Hospital hospital = hp.parse(line1);
+        hospitalDao.add(hospital);
+    }
 
     @Test
     @DisplayName("10만건 이상 데이터가 파싱 되는가")

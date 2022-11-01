@@ -2,7 +2,11 @@ package com.springboot.hospitalserchapi.dao;
 
 import com.springboot.hospitalserchapi.domain.Hospital;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @Component
 public class HospitalDao {
@@ -33,8 +37,25 @@ public class HospitalDao {
     }
 
     public int getCount() {
-        String sql = "SELECT COUNT(id) from nation_wid_hospitals";
+        String sql = "SELECT COUNT(id) from nation_wide_hospitals";
         return this.jdbcTemplate.queryForObject(sql, Integer.class);
+    }
+
+    public void deleteAll() {
+        this.jdbcTemplate.update("DELETE FROM nation_wide_hospitals");
+    }
+
+    RowMapper<Hospital> rowMapper =  (rs, rowNum) -> {
+        Hospital hospital = new Hospital();
+        hospital.setId(rs.getInt("id"));
+        hospital.setOpenServiceName(rs.getString("open_service_name"));
+        hospital.setHospitalName(rs.getString("hospital_name"));
+        hospital.setLicenseDate(rs.getTimestamp("license_date").toLocalDateTime());
+        hospital.setTotalAreaSize(rs.getFloat("total_area_size"));
+        return hospital;
+    };
+    public Hospital findById(int id) {
+        return this.jdbcTemplate.queryForObject("SELECT * FROM nation_wide_hospitals WHERE id = ?", rowMapper,id);
     }
 
 }

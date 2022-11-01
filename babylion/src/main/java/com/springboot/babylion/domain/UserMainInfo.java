@@ -9,7 +9,7 @@ public class UserMainInfo {
     private String name;
     private String nickname;
 
-    public UserMainInfo(String id, String password, String email, String name, String nickname) {
+    public UserMainInfo(String id, String password, String name, String email, String nickname) {
         this.id = id;
         this.password = password;
         this.email = email;
@@ -36,4 +36,14 @@ public class UserMainInfo {
     public String getNickname() {
         return nickname;
     }
+
+    /* users table
+    CREATE TABLE `babylion-db`.`users` (
+  `id` VARCHAR(12) NOT NULL,
+  `password` VARCHAR(15) NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `nickname` VARCHAR(12) NOT NULL,
+  PRIMARY KEY (`id`));
+     */
 }

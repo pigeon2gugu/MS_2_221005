@@ -13,19 +13,18 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/hospital")
 public class HospitalController {
 
     private final HospitalDao hospitalDao;
-
 
     public HospitalController(HospitalDao hospitalDao) {
         this.hospitalDao = hospitalDao;
     }
 
-    @GetMapping("/hospital/{id}")
-    public ResponseEntity<Hospital> findById(@PathVariable String id) throws SQLException {
-        Hospital hospital = hospitalDao.findById(Integer.parseInt(id));
+    @GetMapping("/{id}")
+    public ResponseEntity<Hospital> get(@PathVariable Integer id) {
+        Hospital hospital = hospitalDao.findById(id);
         Optional<Hospital> opt = Optional.of(hospital);
 
         if (!opt.isEmpty()) {
@@ -33,15 +32,5 @@ public class HospitalController {
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Hospital());
         }
-
-/*        String str = hospital.getHospitalName()+"\n"+
-                hospital.getFullAddress()+"\n"+
-                hospital.getRoadNameAddress()+"\n"+
-                hospital.getHealthcareProviderCount()+"\n"+
-                hospital.getTotalNumberOfBeds()+"\n"+
-                hospital.getTotalAreaSize()+"\n"+
-                hospital.getBusinessStatus();
-        */
-
     }
 }

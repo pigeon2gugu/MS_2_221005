@@ -1,5 +1,6 @@
 package com.springboot.hospitalserchapi.parser;
 
+import com.springboot.hospitalserchapi.HospitalService.HospitalService;
 import com.springboot.hospitalserchapi.dao.HospitalDao;
 import com.springboot.hospitalserchapi.domain.Hospital;
 import org.junit.jupiter.api.DisplayName;
@@ -35,6 +36,21 @@ class HospitalParserTest {
     @Autowired //HospitalDao 에 @Component가 있어 bean으로 등록되어 있음.
     HospitalDao hospitalDao;
 
+    @Autowired
+    HospitalService hospitalService;
+
+    @Test
+    @DisplayName("모든 데이터 add가 잘되나")
+    void addAll() throws IOException {
+        String filename = "C:\\Users\\khn11\\OneDrive\\바탕 화면\\멋사_백엔드\\221031_7주차\\fulldata_hospital.csv";
+        List<Hospital> hospitalList = hospitalReadLineContext.readByLine(filename);
+
+        for (Hospital hospital : hospitalList) {
+            hospitalDao.add(hospital);
+        }
+    }
+
+
     @Test
     @DisplayName("Hospital이 insert와 delete가 잘 되는지")
     void addAndDelete() {
@@ -57,7 +73,7 @@ class HospitalParserTest {
         assertEquals(selectedHospital.getOpenServiceName(), hospital.getOpenServiceName());
         assertEquals(selectedHospital.getHospitalName(), hospital.getHospitalName());
         //날짜
-        assertEquals(selectedHospital.getLicenseDate(),hospital.getLicenseDate());
+        assertEquals(selectedHospital.getLicenseDate(), hospital.getLicenseDate());
         //면적 (float)
         assertEquals(selectedHospital.getTotalAreaSize(), hospital.getTotalAreaSize());
 
@@ -67,11 +83,12 @@ class HospitalParserTest {
     @DisplayName("10만건 이상 데이터가 파싱 되는가")
     void name() throws IOException {
         //서버환경에서 build할때 문제가 될 수 있음.
+        //hospitalDao.deleteAll();
         String filename = "C:\\Users\\khn11\\OneDrive\\바탕 화면\\멋사_백엔드\\221031_7주차\\fulldata_hospital.csv";
-        List<Hospital> hospitalList = hospitalReadLineContext.readByLine(filename);
+        int cnt = this.hospitalService.insertLargeVolumeHospitalData(filename);
 
-
-        assertTrue(hospitalList.size() > 100000);
+        assertTrue(cnt > 100000);
+        System.out.printf("파싱된 데이터 개수:%d", cnt);
     }
 
     @Test
@@ -81,13 +98,13 @@ class HospitalParserTest {
         HospitalParser hp = new HospitalParser();
         Hospital hospital = hp.parse(line1);
 
-        String[] row = line1.replace("\"","").split(",");
+        String[] row = line1.replace("\"", "").split(",");
         //System.out.println(Arrays.toString(row));
 
         assertEquals(1, hospital.getId()); // col:0
         assertEquals("의원", hospital.getOpenServiceName());//col:1
-        assertEquals(3620000,hospital.getOpenLocalGovernmentCode()); // col: 3
-        assertEquals("PHMA119993620020041100004",hospital.getManagementNumber()); // col:4
+        assertEquals(3620000, hospital.getOpenLocalGovernmentCode()); // col: 3
+        assertEquals("PHMA119993620020041100004", hospital.getManagementNumber()); // col:4
         assertEquals(LocalDateTime.of(1999, 6, 12, 0, 0, 0), hospital.getLicenseDate()); //19990612 //col:5
         assertEquals(1, hospital.getBusinessStatus()); //col:7
         assertEquals(13, hospital.getBusinessStatusCode());//col:9

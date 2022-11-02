@@ -39,7 +39,7 @@ class HospitalParserTest {
     @Autowired
     HospitalService hospitalService;
 
-    @Test
+/*    @Test
     @DisplayName("모든 데이터 add가 잘되나")
     void addAll() throws IOException {
         String filename = "C:\\Users\\khn11\\OneDrive\\바탕 화면\\멋사_백엔드\\221031_7주차\\fulldata_hospital.csv";
@@ -48,10 +48,12 @@ class HospitalParserTest {
         for (Hospital hospital : hospitalList) {
             hospitalDao.add(hospital);
         }
-    }
+    }*/
 
 
-    @Test
+
+
+/*    @Test
     @DisplayName("Hospital이 insert와 delete가 잘 되는지")
     void addAndDelete() {
         hospitalDao.deleteAll();
@@ -61,7 +63,7 @@ class HospitalParserTest {
         Hospital hospital = hp.parse(line1);
         hospitalDao.add(hospital);
         assertEquals(1, hospitalDao.getCount());
-    }
+    }*/
 
     @Test
     @DisplayName("findById test")
@@ -79,7 +81,7 @@ class HospitalParserTest {
 
     }
 
-    @Test
+/*    @Test
     @DisplayName("10만건 이상 데이터가 파싱 되는가")
     void name() throws IOException {
         //서버환경에서 build할때 문제가 될 수 있음.
@@ -117,6 +119,6 @@ class HospitalParserTest {
         assertEquals(0, hospital.getPatientRoomCount()); //col:31
         assertEquals(0, hospital.getTotalNumberOfBeds()); //col:32
         assertEquals(52.29f, hospital.getTotalAreaSize()); //col:33
-    }
+    }*/
 
 }

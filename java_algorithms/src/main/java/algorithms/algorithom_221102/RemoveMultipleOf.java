@@ -22,7 +22,6 @@ public class RemoveMultipleOf {
                 }
             }
         }
-
         System.out.println(nums);
         return nums.size();
     }

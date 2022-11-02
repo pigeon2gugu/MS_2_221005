@@ -6,6 +6,7 @@ package algorithms.algorithom_221102;
 //list로 할 시 효율성테스트 실패. (remove시 리스트 복사 문제)
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RemoveMultipleOf {
@@ -22,8 +23,14 @@ public class RemoveMultipleOf {
             numChecks[i-2] = true;
         }
 
+        System.out.println(Arrays.toString(nums));
+
         for(int i = 2; i*i <= n; i++) {
             for(int j = 0; j < nums.length; j ++) {
+                if(numChecks[i-2] == false && j == 0) {
+                    System.out.println(i);
+                    break;
+                }
                 if(nums[j]%i==0 && nums[j] != i){
                     numChecks[j] = false;
                 }

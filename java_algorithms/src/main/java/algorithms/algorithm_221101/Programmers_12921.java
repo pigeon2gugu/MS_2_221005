@@ -2,11 +2,11 @@ package algorithms.algorithm_221101;
 
 public class Programmers_12921 {
 
+    @FunctionalInterface
+    public interface solutionHow {
+        int toNum();
+    }
     public boolean solution1(int n) {
-
-        if(n == 2) {
-            return false;
-        }
 
         for(int i = 2; i < n; i ++) {
             if(n%i == 0) {
@@ -19,10 +19,6 @@ public class Programmers_12921 {
     //나누기2 미만까지 탐색
     public boolean solution2(int n) {
 
-        if(n == 2) {
-            return false;
-        }
-
         for(int i = 2; i < n/2; i ++) {
             if(n%i == 0) {
                 return false;
@@ -34,10 +30,6 @@ public class Programmers_12921 {
     //제곱근 이하까지
     public boolean solution3(int n) {
 
-        if(n == 2) {
-            return false;
-        }
-
         for(int i = 2; i <= Math.sqrt(n); i ++) {
             if(n%i == 0) {
                 return false;
@@ -45,7 +37,6 @@ public class Programmers_12921 {
         }
         return true;
     }
-
 
 
     public static void main(String[] args) {

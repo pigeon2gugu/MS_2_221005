@@ -2,7 +2,7 @@ package algorithms.algorithm_221107;
 
 public class HarshadNumber {
     public int sumOfDigits(int num) {
-        int len = (int) (Math.log(num));
+        int len = (int) (Math.log(num))+1;
         int sum = 0;
 
         for(int i = len-1; i >= 0; i --) {
@@ -25,6 +25,6 @@ public class HarshadNumber {
     public static void main(String[] args) {
         HarshadNumber hn = new HarshadNumber();
         System.out.println(hn.sumOfDigits(123));
-        System.out.println(hn.solution(18));
+        System.out.println(hn.solution(1));
     }
 }

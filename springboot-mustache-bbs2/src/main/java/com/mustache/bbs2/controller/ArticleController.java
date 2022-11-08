@@ -28,7 +28,7 @@ public class ArticleController {
 
     @PostMapping("")
     public String add(ArticleDto articleDto) {
-        log.info(articleDto.getTitle());
+        log.info(articleDto.getTitle(), articleDto.getContent());
         Article savedArticle = articleRepository.save(articleDto.toEntity());
         log.info("generatedId:{}", savedArticle.getId());
         return "";

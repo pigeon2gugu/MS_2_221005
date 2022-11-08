@@ -2,7 +2,6 @@ package com.mustache.bbs2.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
 
@@ -12,11 +11,14 @@ import javax.persistence.*;
 @Getter
 public class Article {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //db에 id생성을 맡기겠다.
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //db에 id생성을 맡기겠다. mysql에 autoincresment 체크 됨.
+    //GenerationType.SEQUENCE는 AI가 체크되지 않음.
     private Long id;
     private String title;
+    private String content;
 
-    public Article(String title) {
+    public Article(String title, String content) {
         this.title = title;
+        this.content = content;
     }
 }

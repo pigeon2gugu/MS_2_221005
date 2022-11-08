@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -33,6 +34,18 @@ public class ArticleController {
         return "articles/new"; //articles diractory의 new.mustache로
     }
 
+    @GetMapping("/list")
+    public String list(Model model) {
+        List<Article> articles = articleRepository.findAll();
+        model.addAttribute("articles", articles);
+        return "articles/list";
+    }
+
+    @GetMapping("")
+    public String index() {
+        return "redirect:/articles/list";
+    }
+
     @GetMapping("/{id}")
     public String selectSingle(@PathVariable Long id, Model model) {
         Optional<Article> optArticle = articleRepository.findById(id);
@@ -51,6 +64,6 @@ public class ArticleController {
         log.info(articleDto.getTitle(), articleDto.getContent());
         Article savedArticle = articleRepository.save(articleDto.toEntity());
         log.info("generatedId:{}", savedArticle.getId());
-        return "";
+        return String.format("redirect:/articles/%d", savedArticle.getId()); //등록 후 위에 만든 articles/id 페이지로 이동. show.mustache가 실행된다.
     }
 }

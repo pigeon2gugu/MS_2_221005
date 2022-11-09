@@ -69,6 +69,14 @@ public class ArticleController {
             return "articles/error";
         }
     }
+
+    @GetMapping("/{id}/delete")
+    public String delete(@PathVariable Long id, Model model) {
+        articleRepository.deleteById(id);
+        //model.addAttribute("message", String.format("id : %d가 지워졌습니다.", id));
+        return "redirect:/articles";
+    }
+
     @PostMapping("")
     public String add(ArticleDto articleDto) {
         log.info(articleDto.getTitle(), articleDto.getContent());
@@ -80,6 +88,7 @@ public class ArticleController {
     @PostMapping("/{id}/update")
     public String update(@PathVariable Long id, ArticleDto articleDto, Model model) {
         log.info("title : {} content : {}", articleDto.getTitle(), articleDto.getContent());
+        //.save()를 할 때 id가 있다면 insert대신 update가 실행. duplicated entry error x
         Article article = articleRepository.save(articleDto.toEntity());
         model.addAttribute("article", article);
         return String.format("redirect:/articles/%d", article.getId());

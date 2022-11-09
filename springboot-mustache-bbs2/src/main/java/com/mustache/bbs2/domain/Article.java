@@ -1,5 +1,6 @@
 package com.mustache.bbs2.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "article2")
 @NoArgsConstructor
 @Getter
+@AllArgsConstructor
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //db에 id생성을 맡기겠다. mysql에 autoincresment 체크 됨.

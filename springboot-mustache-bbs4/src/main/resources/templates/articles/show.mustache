@@ -1,0 +1,15 @@
+{{>layouts/header}}
+{{#article}}
+<div class="card" style="width: 20rem;">
+    <div class="card-body">
+        <h5 class="card-subtitle mb-2 text-muted">title : {{title}}</h5>
+        <p class="card-text">content : {{content}}</p>
+        <a href="/articles/list" class="card-link">목록으로</a>
+    </div>
+</div>
+<div class="d-grid gap-2 d-md-block">
+    <a href = "/articles/{{id}}/edit" class = "btn btn-primary">변경</a>
+    <a href = "/articles/{{id}}/delete" class = "btn btn-danger">삭제</a>
+</div>
+{{/article}}
+{{>layouts/footer}}

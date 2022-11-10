@@ -9,22 +9,18 @@ public class Programmers_12906 {
         public ArrayList<Integer> solution(int []arr) {
 
             ArrayList<Integer> answer = new ArrayList<Integer>();
-            int cc = arr[0];
-            int cnt = 0;
-            for(int i = 0; i<arr.length; i++) {
-                if(arr[i] == cc && cnt == 0) {
-                    answer.add(arr[i]);
-                    cnt++;
-                }
+            answer.add(arr[0]);
 
+            int cc = arr[0];
+            for(int i = 0; i<arr.length; i++) {
                 if(arr[i] != cc) {
                     answer.add(arr[i]);
-                    cnt = 1;
                     cc = arr[i];
                 }
             }
 
             return answer;
+
         }
     }
 }

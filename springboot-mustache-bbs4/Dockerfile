@@ -18,12 +18,12 @@ COPY --from=builder /build/build/libs/bbs4-0.0.1-SNAPSHOT.jar .
 
 EXPOSE 8080
 
-# root 대신 nobody 권한으로 실행
+# root 대신 nobody 권한으로 실행 ENTRYPOINT도 jar 파일이름 수정
 USER nobody
 ENTRYPOINT [                                                \
    "java",                                                 \
    "-jar",                                                 \
    "-Djava.security.egd=file:/dev/./urandom",              \
    "-Dsun.net.inetaddr.ttl=0",                             \
-   "bbs5-0.0.1-SNAPSHOT.jar"              \
+   "bbs4-0.0.1-SNAPSHOT.jar"              \
 ]

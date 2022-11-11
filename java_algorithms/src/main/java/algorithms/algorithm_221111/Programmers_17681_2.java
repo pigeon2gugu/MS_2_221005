@@ -24,12 +24,12 @@ public class Programmers_17681_2 {
             ArrayList<String> answer1 = new ArrayList<>();
 
             for(int i = 0; i< arr1.length; i++) {
-                binaryArr1.add(getBinaryString(arr1[i]));
-                binaryArr2.add(getBinaryString(arr2[i]));
-                System.out.println(binaryArr1);
-                System.out.println(binaryArr2);
+                binaryArr1.add("0".repeat(n- getBinaryString(arr1[i]).length()) + getBinaryString(arr1[i]));
+                binaryArr1.add("0".repeat(n- getBinaryString(arr2[i]).length()) + getBinaryString(arr2[i]));
             }
 
+            System.out.println(binaryArr1);
+            System.out.println(binaryArr2);
             return answer1;
         }
 

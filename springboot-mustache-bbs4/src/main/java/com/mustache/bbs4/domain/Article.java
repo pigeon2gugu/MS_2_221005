@@ -1,7 +1,7 @@
 package com.mustache.bbs4.domain;
 
 
-import com.mustache.bbs4.domain.dto.ArticleResponse;
+import com.mustache.bbs4.domain.dto.ArticleDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +25,8 @@ public class Article {
         this.content = content;
     }
 
-    public static ArticleResponse of(Article article) {
-        return new ArticleResponse(article.getId(), article.getTitle(), article.getContent());
+    public static ArticleDto of(Article article) {
+        return new ArticleDto(article.getId(), article.getTitle(), article.getContent());
     }
 }
+

@@ -1,7 +1,6 @@
 package com.mustache.bbs4.controller;
 
-import com.mustache.bbs4.domain.dto.ArticleResponse;
-import com.mustache.bbs4.domain.dto.HospitalResponse;
+import com.mustache.bbs4.domain.dto.ArticleDto;
 import com.mustache.bbs4.service.ArticleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +19,8 @@ public class ArticleRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ArticleResponse> get(@PathVariable Long id) { // ResponseEntity도 DTO타입
-        ArticleResponse articleResponse = articleService.getArticle(id); // DTO
-        return ResponseEntity.ok().body(articleResponse); // Return은 DTO로
+    public ResponseEntity<ArticleDto> get(@PathVariable Long id) { // ResponseEntity도 DTO타입
+        ArticleDto articleDto = articleService.getArticle(id); // DTO
+        return ResponseEntity.ok().body(articleDto); // Return은 DTO로
     }
 }

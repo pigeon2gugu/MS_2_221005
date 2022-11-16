@@ -1,8 +1,7 @@
 package com.mustache.bbs4.service;
 
 import com.mustache.bbs4.domain.Article;
-import com.mustache.bbs4.domain.Hospital;
-import com.mustache.bbs4.domain.dto.ArticleResponse;
+import com.mustache.bbs4.domain.dto.ArticleDto;
 import com.mustache.bbs4.domain.repository.ArticleRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +15,12 @@ public class ArticleService {
         this.articleRepository = articleRepository;
     }
 
-    public ArticleResponse getArticle(Long id) {
+    public ArticleDto getArticle(Long id) {
         Optional<Article> optArticle = articleRepository.findById(id); // Entity
         Article article = optArticle.get();
-        ArticleResponse articleResponse = Article.of(article);
+        ArticleDto articleDto = Article.of(article);
 
-        return articleResponse;
+        return articleDto;
     }
 
 }

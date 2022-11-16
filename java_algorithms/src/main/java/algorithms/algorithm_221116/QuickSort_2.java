@@ -33,9 +33,20 @@ public class QuickSort_2 {
             }
         }
 
+        int[] leftArr = new int[leftIdx];
+        int[] rightArr = new int[arr.length-leftIdx];
 
+        for(int i = 0; i < leftIdx; i++) {
+            leftArr[i] = arr[i];
+        }
+
+        for(int i = 0 ; i < rightArr.length; i++){
+            rightArr[i] = arr[i+leftIdx];
+        }
 
         System.out.println(Arrays.toString(arr));
+        System.out.println(Arrays.toString(leftArr));
+        System.out.println(Arrays.toString(rightArr));
     }
 
 

@@ -1,12 +1,10 @@
 package com.example.springbootjpareview.controller;
 
+import com.example.springbootjpareview.domain.dto.UserRequest;
 import com.example.springbootjpareview.domain.dto.UserResponse;
 import com.example.springbootjpareview.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -22,5 +20,11 @@ public class UserRestController {
     public ResponseEntity<UserResponse> get(@PathVariable Long id) {
         UserResponse userFindResponse = userService.getUser(id);
         return ResponseEntity.ok().body(userFindResponse);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<UserResponse> add(@RequestBody UserRequest dto) {
+        UserResponse userResponse = userService.addUser(dto);
+        return ResponseEntity.ok().body(userResponse);
     }
 }

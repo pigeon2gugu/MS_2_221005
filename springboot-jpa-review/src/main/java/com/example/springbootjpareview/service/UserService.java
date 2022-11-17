@@ -35,7 +35,7 @@ public class UserService {
         Optional<User> selectedUser = userRepository.findByUsername(dto.getUsername());
         if (selectedUser.isEmpty()) {
             User savedUser = userRepository.save(user);
-            return new UserResponse(savedUser.getId(), savedUser.getUsername(), "유저 등록이 완료되었습니다.");
+            return new UserResponse(savedUser.getId(), savedUser.getUsername(), "회원 등록 성공");
         } else {
             return new UserResponse(null, dto.getUsername(), "이 이름은 이미 존재합니다. 다른 이름을 사용해주세요.");
         }

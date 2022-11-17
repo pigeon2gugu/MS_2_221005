@@ -1,6 +1,6 @@
 package com.example.springbootjpareview.controller;
 
-import com.example.springbootjpareview.domain.dto.UserFindResponse;
+import com.example.springbootjpareview.domain.dto.UserResponse;
 import com.example.springbootjpareview.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +19,8 @@ public class UserRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserFindResponse> get(@PathVariable Long id) {
-        UserFindResponse userFindResponse = userService.getUser(id);
+    public ResponseEntity<UserResponse> get(@PathVariable Long id) {
+        UserResponse userFindResponse = userService.getUser(id);
         return ResponseEntity.ok().body(userFindResponse);
     }
 }

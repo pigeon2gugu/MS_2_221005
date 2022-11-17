@@ -1,7 +1,7 @@
 package com.example.springbootjpareview.service;
 
 import com.example.springbootjpareview.domain.User;
-import com.example.springbootjpareview.domain.dto.UserFindResponse;
+import com.example.springbootjpareview.domain.dto.UserResponse;
 import com.example.springbootjpareview.domain.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +15,16 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserFindResponse getUser(Long id) {
+    public UserResponse getUser(Long id) {
         Optional<User> optUser = userRepository.findById(id);
-        User user = optUser.get();
-        UserFindResponse userFindResponse = user.of(user);
 
-        return userFindResponse;
+        if (optUser.isEmpty()) {
+            return new UserResponse(id, "", "해당 id의 유저가 없습니다.");
+        }
+        else {
+            User user = optUser.get();
+            return new UserResponse(user.getId(), user.getUsername(), "");
+        }
+
     }
 }

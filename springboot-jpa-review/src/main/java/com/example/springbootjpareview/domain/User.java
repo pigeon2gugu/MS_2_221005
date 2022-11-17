@@ -1,6 +1,6 @@
 package com.example.springbootjpareview.domain;
 
-import com.example.springbootjpareview.domain.dto.UserFindResponse;
+import com.example.springbootjpareview.domain.dto.UserResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,7 +27,4 @@ public class User {
         this.password = password;
     }
 
-    public static UserFindResponse of(User user) {
-        return new UserFindResponse(user.getId(), user.getUsername());
-    }
 }

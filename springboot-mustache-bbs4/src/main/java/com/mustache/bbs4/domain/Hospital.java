@@ -1,7 +1,9 @@
 package com.mustache.bbs4.domain;
 
 import com.mustache.bbs4.domain.dto.HospitalResponse;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +13,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "nation_wide_hospitals")
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Hospital {
     @Id
     private Integer id;

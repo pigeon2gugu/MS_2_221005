@@ -2,8 +2,10 @@ package com.mustache.bbs4.domain.repository;
 
 import com.mustache.bbs4.domain.Article;
 import com.mustache.bbs4.domain.Hospital;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface HospitalRepository extends JpaRepository<Hospital, Integer> {
@@ -17,5 +19,7 @@ public interface HospitalRepository extends JpaRepository<Hospital, Integer> {
     
     //내림차순까지 포함
     List<Hospital> findByPatientRoomCountBetweenOrderByPatientRoomCountDesc(int a, int b);
+
+    Page<Hospital> findByRoadNameAddressContaining(String keyword, Pageable pageable);
 
 }

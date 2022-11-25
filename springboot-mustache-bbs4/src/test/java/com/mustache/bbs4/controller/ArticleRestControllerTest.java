@@ -73,7 +73,7 @@ class ArticleRestControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.title").exists())
-                .andExpect(jsonPath("$.title").value("제목입니다."))
+                .andExpect(jsonPath("$.title").value("제목입니다"))
                 .andExpect(jsonPath("$.content").exists())
                 .andDo(print());
 

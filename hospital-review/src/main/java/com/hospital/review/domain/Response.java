@@ -11,7 +11,7 @@ public class Response<T> {
     private String resultCode; //무슨 에러가 났는지
     private T result;
 
-    private static Response<Void> error(String resultCode) {
+    public static Response<Void> error(String resultCode) {
         return new Response(resultCode, null);
     }
 

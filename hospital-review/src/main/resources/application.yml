@@ -1,0 +1,17 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      force-response: true
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:8080/likelion-db
+    username: root
+    password: 1234
+    # ??? SQL ?? ??
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update

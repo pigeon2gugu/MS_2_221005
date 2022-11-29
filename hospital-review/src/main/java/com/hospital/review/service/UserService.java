@@ -7,8 +7,10 @@ import com.hospital.review.exception.ErrorCode;
 import com.hospital.review.exception.HospitalReviewAppException;
 import com.hospital.review.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import utils.JwtTokenUtil;
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +18,12 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder encoder;
+
+    @Value("${jwt.token.secret}")
+    private String secretKey;
+
+    private long expireTimeMs = 1000 * 60 * 60; //1 hour
+
 
     public UserDto join(UserJoinRequest request) {
         //비즈니스 로직 - 회원가입
@@ -47,6 +55,9 @@ public class UserService {
             throw new HospitalReviewAppException(ErrorCode.INVALID_PASSWORD, "비밀번호가 일치하지 않습니다.");
 
         }
-        return "";
+
+        //예외가 안났으면 token 발행. JWT (JSON Web Token)형식의 token
+
+        return JwtTokenUtil.createToken(userName, secretKey, expireTimeMs);
     }
 }

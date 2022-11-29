@@ -7,6 +7,7 @@ import com.hospital.review.exception.ErrorCode;
 import com.hospital.review.exception.HospitalReviewAppException;
 import com.hospital.review.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder encoder;
 
     public UserDto join(UserJoinRequest request) {
         //비즈니스 로직 - 회원가입
@@ -25,12 +27,26 @@ public class UserService {
                 });
 
         //회원가입 .save()
-        User savedUser = userRepository.save(request.toEntity());
+        User savedUser = userRepository.save(request.toEntity(encoder.encode(request.getPassword())));
 
         return UserDto.builder()
                 .id(savedUser.getId())
                 .userName(savedUser.getUserName())
                 .email(savedUser.getEmailAddress())
                 .build();
+    }
+
+    public String login(String userName, String password) {
+
+        //userName이 있는지. 없으면 NOT_FOUND error
+        User user = userRepository.findByUserName(userName)
+                .orElseThrow(() -> new HospitalReviewAppException(ErrorCode.NOT_FOUND, String.format("%s는 맞는 id가 아닙니다.", userName)));
+
+        //password 일치 하는지.
+        if(!encoder.matches(password, user.getPassword())) {
+            throw new HospitalReviewAppException(ErrorCode.INVALID_PASSWORD, "비밀번호가 일치하지 않습니다.");
+
+        }
+        return "";
     }
 }

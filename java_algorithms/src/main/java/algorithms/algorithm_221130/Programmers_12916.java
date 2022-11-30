@@ -9,7 +9,7 @@ public class Programmers_12916 {
         int cntP = 0;
         int cntY = 0;
 
-        for(int i = 0 ; i < s.length(); i++) {
+/*        for(int i = 0 ; i < s.length(); i++) {
             if(s.charAt(i) == 'P' || s.charAt(i) == 'p') {
                 cntP += 1;
             }
@@ -17,8 +17,17 @@ public class Programmers_12916 {
             if(s.charAt(i) == 'Y' || s.charAt(i) == 'y') {
                 cntY += 1;
             }
-        }
+        }*/
 
+        for(int i = 0 ; i < s.length(); i++) {
+            if ('P' == Character.toUpperCase(s.charAt(i))) {
+                cntP++;
+            }
+
+            if ('Y' == Character.toUpperCase(s.charAt(i))) {
+                cntY++;
+            }
+        }
 
         if(cntP != cntY) {
             answer = false;

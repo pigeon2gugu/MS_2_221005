@@ -39,12 +39,6 @@ class UserControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
-    UserJoinRequest userJoinRequest = UserJoinRequest.builder()
-            .userName("haneul")
-            .password("1234")
-            .email("khn1135@gmail.com")
-            .build();
-
 
     @Test
     @DisplayName("회원가입 성공")
@@ -80,7 +74,7 @@ class UserControllerTest {
                 .thenThrow(new HospitalReviewAppException(ErrorCode.DUPLICATED_USER_NAME, ""));
 
 
-        mockMvc.perform(post("/api/v1/users/login")
+        mockMvc.perform(post("/api/v1/users/join")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(userJoinRequest)))
@@ -90,8 +84,8 @@ class UserControllerTest {
 
     @Test
     @DisplayName("로그인 성공")
-    @WithAnonymousUser
-    void login_fail1() throws Exception {
+    @WithMockUser
+    void login_success() throws Exception {
 
         UserLoginRequest userLoginRequest = UserLoginRequest.builder()
                 .userName("haneul")
@@ -112,8 +106,8 @@ class UserControllerTest {
 
     @Test
     @DisplayName("로그인 실패 - password잘못 입력")
-    @WithAnonymousUser
-    void login_fail2() throws Exception {
+    @WithMockUser
+    void login_fail1() throws Exception {
 
         UserLoginRequest userLoginRequest = UserLoginRequest.builder()
                 .userName("haneul")
@@ -128,14 +122,14 @@ class UserControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(userLoginRequest)))
                 .andDo(print())
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isBadRequest());
 
     }
 
     @Test
     @DisplayName("로그인 실패 - id 잘못 입력")
     @WithMockUser
-    void login_success() throws Exception {
+    void login_fail2() throws Exception {
         UserLoginRequest userLoginRequest = UserLoginRequest.builder()
                 .userName("haneul")
                 .password("1234")

@@ -3,6 +3,7 @@ package com.hospital.review.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hospital.review.domain.dto.UserDto;
 import com.hospital.review.domain.dto.UserJoinRequest;
+import com.hospital.review.domain.dto.UserLoginRequest;
 import com.hospital.review.exception.ErrorCode;
 import com.hospital.review.exception.HospitalReviewAppException;
 import com.hospital.review.service.UserService;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -74,10 +76,11 @@ class UserControllerTest {
                 .email("khn1135@gmail.com")
                 .build();
 
-        when(userService.join(any())).thenThrow(new HospitalReviewAppException(ErrorCode.DUPLICATED_USER_NAME, ""));
+        when(userService.join(any()))
+                .thenThrow(new HospitalReviewAppException(ErrorCode.DUPLICATED_USER_NAME, ""));
 
 
-        mockMvc.perform(post("/api/v1/users/join")
+        mockMvc.perform(post("/api/v1/users/login")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(userJoinRequest)))
@@ -86,36 +89,66 @@ class UserControllerTest {
     }
 
     @Test
-    @DisplayName("로그인 실패 - id없음")
-    @WithMockUser
+    @DisplayName("로그인 성공")
+    @WithAnonymousUser
     void login_fail1() throws Exception {
-        //id, pw -> NOT_FOUND
 
-        String id = "pigeon2gugu";
-        String password = "1234";
+        UserLoginRequest userLoginRequest = UserLoginRequest.builder()
+                .userName("haneul")
+                .password("1234")
+                .build();
 
-        when(userService.login(any(), any())).thenThrow(new HospitalReviewAppException(ErrorCode.NOT_FOUND, ""));
+        when(userService.login(any(), any()))
+                .thenReturn("token");
 
         mockMvc.perform(post("/api/v1/users/login")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsBytes(userJoinRequest)))
+                        .content(objectMapper.writeValueAsBytes(userLoginRequest)))
                 .andDo(print())
-                .andExpect(status().isNotFound());
+                .andExpect(status().isOk());
 
     }
 
     @Test
     @DisplayName("로그인 실패 - password잘못 입력")
-    @WithMockUser
+    @WithAnonymousUser
     void login_fail2() throws Exception {
+
+        UserLoginRequest userLoginRequest = UserLoginRequest.builder()
+                .userName("haneul")
+                .password("1234")
+                .build();
+
+        when(userService.login(any(), any()))
+                .thenThrow(new HospitalReviewAppException(ErrorCode.INVALID_PASSWORD, ""));
+
+        mockMvc.perform(post("/api/v1/users/login")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(userLoginRequest)))
+                .andDo(print())
+                .andExpect(status().isUnauthorized());
 
     }
 
     @Test
-    @DisplayName("로그인 성공")
+    @DisplayName("로그인 실패 - id 잘못 입력")
     @WithMockUser
     void login_success() throws Exception {
+        UserLoginRequest userLoginRequest = UserLoginRequest.builder()
+                .userName("haneul")
+                .password("1234")
+                .build();
 
+        when(userService.login(any(), any()))
+                .thenThrow(new HospitalReviewAppException(ErrorCode.NOT_FOUND, ""));
+
+        mockMvc.perform(post("/api/v1/users/login")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(userLoginRequest)))
+                .andDo(print())
+                .andExpect(status().isNotFound());
     }
 }

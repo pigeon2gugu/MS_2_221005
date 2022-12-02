@@ -15,9 +15,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
-                .httpBasic().disable()
+                .httpBasic().disable() //ui쪽 disable
                 .csrf().disable()
-                .cors().and()
+                .cors().and() //도메인이 다를 때 허용해준다
                 .authorizeRequests()
                 .antMatchers("/api/**").permitAll()
                 .antMatchers("/api/v1/users/join", "/api/v1/users/login").permitAll() // join, login은 언제나 가능

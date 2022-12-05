@@ -2,6 +2,7 @@ package com.hospital.review.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -19,7 +20,8 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().and() //도메인이 다를 때 허용해준다
                 .authorizeRequests()
-                .antMatchers("/api/**").permitAll()
+                .antMatchers("/api/v1/users/join", "/api/v1/users/login").permitAll() //join과 login은 모두 허용. authenticated()보다 먼저 써야함. 순서대로 적용.
+                .antMatchers(HttpMethod.POST,"/api/**").authenticated() //api/v1의 모든 주소의 post에 권한이 있는 자만 허락
                 .antMatchers("/api/v1/users/join", "/api/v1/users/login").permitAll() // join, login은 언제나 가능
                 .and()
                 .sessionManagement()

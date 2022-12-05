@@ -57,6 +57,7 @@ public class UserService {
         }
 
         //예외가 안났으면 token 발행. JWT (JSON Web Token)형식의 token
+        //실제 scretKey는 environment variable에 저장
 
         return JwtTokenUtil.createToken(userName, secretKey, expireTimeMs);
     }

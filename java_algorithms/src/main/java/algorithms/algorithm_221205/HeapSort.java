@@ -10,6 +10,11 @@ public class HeapSort {
         b = temp;
     }
 
+    public static int[] child(int a) {
+        int[] children = {2*a+1, 2*a+2};
+        return children;
+    }
+
     public static int[] heap(int[] arr) {
 
         int idx = arr.length -1;
@@ -37,5 +42,6 @@ public class HeapSort {
     public static void main(String[] args) {
         int [] arr = {6, 7, 5, 8 ,9};
         System.out.println(Arrays.toString(heap(arr)));
+        System.out.println(Arrays.toString(child(33)));
     }
 }

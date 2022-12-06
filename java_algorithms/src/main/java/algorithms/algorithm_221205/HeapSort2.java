@@ -40,7 +40,7 @@ public class HeapSort2 {
     public static void main(String[] args) {
         int[] arr = new int[]{6, 5, 7, 8};
         arr = new int[]{5, 8, 4, 7, 3, 2, 9, 6, 7};
-        for (int j = (arr.length-2); j >= 0 ; j--) {
+        for (int j = (arr.length-2)/2; j >= 0 ; j--) {
             arr = heap(arr, j);
             System.out.println(Arrays.toString(arr));
         }

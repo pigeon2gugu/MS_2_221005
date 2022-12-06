@@ -24,10 +24,10 @@ public class JwtTokenUtil {
         claims.put("userName", userName); //token에 담는 정보 : Claim
 
         return Jwts.builder()
-                .setClaims(claims)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expireTimeMs))
-                .signWith(SignatureAlgorithm.HS256, key)
+                .setClaims(claims) //인증하고 필요한 덜 민감한 정보들
+                .setIssuedAt(new Date(System.currentTimeMillis())) // 언제 만들었는지
+                .setExpiration(new Date(System.currentTimeMillis() + expireTimeMs)) // 언제 만료될지
+                .signWith(SignatureAlgorithm.HS256, key) // 어떤 secretKey로 sign할지
                 .compact();
     }
 }

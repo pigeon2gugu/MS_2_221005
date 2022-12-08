@@ -1,9 +1,7 @@
 package com.hospital.review.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.hospital.review.domain.dto.VisitResponse;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,8 +10,9 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Table(name = "visit")
-public class Visit {
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+public class Visit extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,4 +29,13 @@ public class Visit {
     private String disease;
 
     private float amount;
+
+    public VisitResponse toResponse() {
+        return VisitResponse.builder()
+                .hospitalName(this.hospital.getHospitalName())
+                .userName(this.user.getUserName())
+                .disease(this.disease)
+                .amount(this.amount)
+                .build();
+    }
 }

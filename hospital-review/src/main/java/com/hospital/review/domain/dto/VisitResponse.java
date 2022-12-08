@@ -5,15 +5,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Builder
-public class VisitCreateRequest {
-
-    //private Long userId;
-    private Integer hospitalId;
+public class VisitResponse {
+    private String hospitalName;
+    private String userName;
     private String disease;
     private float amount;
-
 }

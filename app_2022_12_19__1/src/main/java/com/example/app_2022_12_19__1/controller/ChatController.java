@@ -2,9 +2,12 @@ package com.example.app_2022_12_19__1.controller;
 
 import com.example.app_2022_12_19__1.domain.ChatMessage;
 import com.example.app_2022_12_19__1.domain.RsData;
+import com.example.app_2022_12_19__1.domain.SseEmitters;
 import com.example.app_2022_12_19__1.response.MessageListRequest;
 import com.example.app_2022_12_19__1.response.MessageListResponse;
 import com.example.app_2022_12_19__1.response.WriteMessageRequest;
+import com.example.app_2022_12_19__1.response.WriteMessageResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,36 +17,30 @@ import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/chat")
+@RequiredArgsConstructor
 public class ChatController {
 
+    private final SseEmitters sseEmitters;
     private List<ChatMessage> chatMessages = new ArrayList<>();
 
 
     @PostMapping("/writeMessage")
     @ResponseBody
-    public RsData<ChatMessage> writeMessage(@RequestBody WriteMessageRequest request) {
+    public RsData<WriteMessageResponse> writeMessage(@RequestBody WriteMessageRequest request) {
         ChatMessage message = new ChatMessage(request.getAuthorName(), request.getContent());
         chatMessages.add(message);
 
+        sseEmitters.noti("chat__messageAdded");
+
         return new RsData<>("S-1",
                 "메세지가 작성되었습니다.",
-                message);
+                new WriteMessageResponse(message.getId()));
 
     }
 
-/*
     @GetMapping("/messages")
     @ResponseBody
-    public RsData<MessageListResponse> messages() {
-        return new RsData<>("S-1",
-                "메세지 목록 불러오기 성공",
-                new MessageListResponse(chatMessages));
-    }
-*/
-
-    @GetMapping("/messages")
-    @ResponseBody
-    public RsData<MessageListResponse> messagesFrom(MessageListRequest request) {
+    public RsData<MessageListResponse> messages(MessageListRequest request) {
 
         List<ChatMessage> messages = chatMessages;
 

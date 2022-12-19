@@ -67,4 +67,10 @@ public class ChatController {
                 new MessageListResponse(messages));
     }
 
+    //채팅방
+    @GetMapping("/room")
+    public String showRoom() {
+        return "chat/room";
+    }
+
 }

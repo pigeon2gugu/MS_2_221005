@@ -3,3 +3,15 @@ server:
   servlet:
     encoding:
       force-response: true
+spring:
+  thymeleaf:
+    cache: false
+    prefix: file:src/main/resources/templates/
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+logging:
+  level:
+    com.ll.exam.app_2022_12_19__1: debug
